@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+<script>
+    var socket = io.connect()
+    socket.on('message', (data) => {
+        console.log(data)
+        socket.send('消息已收到。')
+    })
+    socket.on('disconnect', () => {
+        console.log('服务端断开连接。')
+    })
+</script>
+</body>
+</html>
