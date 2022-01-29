@@ -1,12 +1,11 @@
 let http = require("http");
+let express = require("express")
 let sio = require("socket.io");
-let fs = require("fs");
 
-let server = http.createServer( (req,res) => {
-    res.writeHead(200, {
-        "Content-Type": "text/html"
-    })
-    res.end(fs.readFileSync("./index.html"));
+let app = express()
+let server = http.createServer(app)
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html')
 })
 
 let socketIO = sio(server);

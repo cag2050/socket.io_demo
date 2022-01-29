@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+</head>
+<body>
+<script>
+    let chat = io.connect('http://localhost:1337/chat')
+    let news = io.connect('http://localhost:1337/news')
+
+    //注意：是connect
+    chat.on('connect', () => {
+        chat.send('你好。')
+        chat.on('message', msg => {
+            console.log('从chat命名空间接收到消息：' + msg)
+        })
+    })
+    news.on('connect', () => {
+        news.emit('sendMessage', 'hello.')
+        news.on('sendMessage', data => {
+            console.log('从news命名空间接收到sendMessage事件，数据为：' + data)
+        })
+    })
+</script>
+</body>
+</html>

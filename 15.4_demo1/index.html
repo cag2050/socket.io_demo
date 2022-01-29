@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+昵称：<input type="text" id="nickname"/>
+<input type="button" onclick="handleSetNickname()" value="设置昵称"/>
+<input type="button" onclick="handleGetNickname()" value="获取昵称"/>
+
+<script>
+    var socket = io.connect()
+    function handleSetNickname() {
+        socket.emit('setNickname', document.getElementById('nickname').value)
+    }
+    function handleGetNickname() {
+        socket.emit('getNickname')
+    }
+    socket.on('sendNickname', (data) => {
+        console.log('我的昵称为：' + data)
+    })
+    socket.on('err', data => {
+        console.log('服务器出错，错误信息为：' + data)
+    })
+</script>
+</body>
+</html>

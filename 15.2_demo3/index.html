@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+<script>
+    var socket = io.connect()
+    socket.on('setName', (name, fn) => {
+        console.log(name)
+        fn('李四', '王五')
+    })
+</script>
+</body>
+</html>

@@ -11,13 +11,9 @@ let server = http.createServer( (req,res) => {
 
 let socketIO = sio(server);
 socketIO.on('connection', socket => {
-    console.log('客户端建立连接。')
-    socket.send('你好。')
-    socket.on('message', msg => {
-        console.log('接收到一个消息：', msg)
-    })
-    socket.on('disconnect', () => {
-        console.log('客户端断开连接。')
+    socket.emit('setName', '张三', (data1, data2) => {
+        console.log(data1)
+        console.log(data2)
     })
 })
 server.listen(1337)
